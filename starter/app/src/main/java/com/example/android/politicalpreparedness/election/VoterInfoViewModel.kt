@@ -20,8 +20,7 @@ import kotlinx.coroutines.withContext
 import java.lang.Exception
 
 
-class VoterInfoViewModel(val election: Election, application: Application): AndroidViewModel(application)  {
-
+class VoterInfoViewModel(val election: Election, application: Application) : AndroidViewModel(application) {
 
 
     var client: CivicsApiService = CivicsApi.retrofitService
@@ -31,7 +30,7 @@ class VoterInfoViewModel(val election: Election, application: Application): Andr
 
     private val _selectedElection = MutableLiveData<Election>()
 
-    // The external LiveData for the SelectedProperty
+
     val selectedElection: LiveData<Election>
         get() = _selectedElection
 
@@ -40,7 +39,7 @@ class VoterInfoViewModel(val election: Election, application: Application): Andr
     private val _followButtonText = MutableLiveData<String>()
     val followButtonText: LiveData<String> = _followButtonText
 
-    private suspend fun refreshVoterInfo(electionId: Int, address: String){
+    private suspend fun refreshVoterInfo(electionId: Int, address: String) {
 
         withContext(Dispatchers.IO) {
 
@@ -49,15 +48,12 @@ class VoterInfoViewModel(val election: Election, application: Application): Andr
 
                 val voterInfoDomainModel = networkVoterInfoResponse.asDomainModel()
 
-               voterInfoForSelectedElection.postValue(voterInfoDomainModel)
+                voterInfoForSelectedElection.postValue(voterInfoDomainModel)
 
-
-
-                voterInfoForSelectedElection.value?.state?.electionAdministrationBody?.address?.let { Log.d("help", it.zip) }
 
             } catch (e: Exception) {
 
-                Log.d("ExceptionInRefreshVoterInfo",e.toString())
+                Log.d("ExceptionInRefreshVoterInfo", e.toString())
             }
 
         }
@@ -88,7 +84,7 @@ class VoterInfoViewModel(val election: Election, application: Application): Andr
         _followButtonText.postValue(text)
     }
 
-      fun followOrUnfollow() = viewModelScope.launch(Dispatchers.IO) {
+    fun followOrUnfollow() = viewModelScope.launch(Dispatchers.IO) {
         if (appRepository.isElectionFollowed(election.id)) {
             appRepository.unfollowElection(election.id)
             updateFollowButtonText()
@@ -98,7 +94,6 @@ class VoterInfoViewModel(val election: Election, application: Application): Andr
         }
 
     }
-
 
 
     /**
@@ -112,22 +107,13 @@ class VoterInfoViewModel(val election: Election, application: Application): Andr
 
             selectedElection.value?.let {
 
-                refreshVoterInfo(it.id, it.division.country+"/"+it.division.state)
+                refreshVoterInfo(it.id, it.division.country + "/" + it.division.state)
             }
 
         }
-        Log.d("hey", mailingAddress.value.toString())
+
     }
 
-
-    //TODO: Add live data to hold voter info
-
-    //TODO: Add var and methods to populate voter info
-
-    //TODO: Add var and methods to support loading URLs
-
-    //TODO: Add var and methods to save and remove elections to local database
-    //TODO: cont'd -- Populate initial state of save button to reflect proper action based on election saved status
 
     /**
      * Hint: The saved state can be accomplished in multiple ways. It is directly related to how elections are saved/removed from the database.

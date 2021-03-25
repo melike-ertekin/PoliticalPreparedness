@@ -5,10 +5,8 @@ import android.content.Intent
 import android.net.Uri
 import android.util.Log
 import android.view.View
-import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -23,7 +21,6 @@ import com.example.android.politicalpreparedness.representative.adapter.Represen
 @BindingAdapter("listData")
 fun bindRecyclerView(recyclerView: RecyclerView, data: List<Election>?) {
 
-    Log.d("electionsData", data?.size.toString())
     val adapter = recyclerView.adapter as ElectionListAdapter
     adapter.submitList(data)
 
@@ -32,7 +29,6 @@ fun bindRecyclerView(recyclerView: RecyclerView, data: List<Election>?) {
 @BindingAdapter("representativeData")
 fun bindRecyclerView2(recyclerView: RecyclerView, data: List<Representative>?) {
 
-    Log.d("representativeData", data?.size.toString())
     val adapter = recyclerView.adapter as RepresentativeListAdapter
     adapter.submitList(data)
 
@@ -41,7 +37,6 @@ fun bindRecyclerView2(recyclerView: RecyclerView, data: List<Representative>?) {
 @BindingAdapter("linkOnClick")
 fun bindOnTextClickListener(textView: TextView, url: String?) {
 
-    Log.d("myurl", url.toString())
     textView.setOnClickListener { view: View? ->
         if (url != null && url != "") {
             val context: Context = textView.context

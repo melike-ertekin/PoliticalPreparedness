@@ -47,19 +47,15 @@ class RepresentativeFragment : Fragment() {
 
         binding.representativeViewModel = viewModel
         binding.myRepresentativeRecycler.adapter = RepresentativeListAdapter()
-        binding.address= Address("","","","", "")
+        binding.address = Address("", "", "", "", "")
 
-        /*val statesForSpinner = requireContext().resources.getStringArray(R.array.states)
-        var statesAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, statesForSpinner)
-        statesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding.state.adapter = statesAdapter*/
 
-        binding.buttonLocation.setOnClickListener{
+        binding.buttonLocation.setOnClickListener {
             fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
             getLocation()
         }
 
-        binding.state.onItemSelectedListener  = object : AdapterView.OnItemSelectedListener {
+        binding.state.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(p0: AdapterView<*>?) {
 
             }
@@ -71,20 +67,8 @@ class RepresentativeFragment : Fragment() {
             }
         }
 
-        //TODO: Define and assign Representative adapter
-
-        //TODO: Populate Representative adapter
-
-        //TODO: Establish button listeners for field and location search
-    return binding.root
+        return binding.root
     }
-
-
-    companion object {
-        //TODO: Add Constant for Location request
-    }
-
-    //TODO: Declare ViewModel
 
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
@@ -114,7 +98,6 @@ class RepresentativeFragment : Fragment() {
     }
 
 
-
     private fun getLocation() {
 
         when {
@@ -130,13 +113,13 @@ class RepresentativeFragment : Fragment() {
                         val address = geoCodeLocation(lastLocation)
                         binding.address = address
                         val stateText = address.state
-                        Log.d("stataText",stateText)
+
                         if (stateText != "") {
                             val statesForSpinner = requireContext().resources.getStringArray(R.array.states)
                             var statesAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, statesForSpinner)
                             val spinnerPosition: Int = statesAdapter.getPosition(stateText)
                             binding.state.setSelection(spinnerPosition)
-                                }
+                        }
 
                     }
                 }
@@ -144,7 +127,7 @@ class RepresentativeFragment : Fragment() {
 
                 Toast.makeText(context, "Location permission is granted.", Toast.LENGTH_LONG).show()
             }
-            (ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(), Manifest.permission.ACCESS_FINE_LOCATION)) ->{
+            (ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(), Manifest.permission.ACCESS_FINE_LOCATION)) -> {
                 // Explain why you need the permission
                 // Add dialog
                 requestPermissions(
@@ -160,8 +143,6 @@ class RepresentativeFragment : Fragment() {
                         FINE_LOCATION_ACCESS_REQUEST_CODE
                 )
         }
-        //TODO: Get location from LocationServices
-        //TODO: The geoCodeLocation method is a helper function to change the lat/long location to a human readable street address
     }
 
     private fun geoCodeLocation(location: Location): Address {

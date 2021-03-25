@@ -14,7 +14,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.lang.Exception
 
-class RepresentativeViewModel: ViewModel() {
+class RepresentativeViewModel : ViewModel() {
 
     var client: CivicsApiService = CivicsApi.retrofitService
 
@@ -27,17 +27,13 @@ class RepresentativeViewModel: ViewModel() {
         get() = _representatives
 
 
-    fun updateAddress(address: Address){
-        _address.postValue(address)
-        Log.d("selected address", address.toFormattedString())
-    }
-    fun findMyRepresentative(address: Address){
+    fun findMyRepresentative(address: Address) {
         getRepresentatives(address)
         Log.d("selected address", address.toFormattedString())
 
     }
 
-    private fun getRepresentatives(address: Address)  = viewModelScope.launch(Dispatchers.IO) {
+    private fun getRepresentatives(address: Address) = viewModelScope.launch(Dispatchers.IO) {
 
 
         try {
@@ -50,7 +46,7 @@ class RepresentativeViewModel: ViewModel() {
 
         } catch (e: Exception) {
 
-            Log.d("ExceptionInGetRepresentatives",e.toString())
+            Log.d("ExceptionInGetRepresentatives", e.toString())
         }
 
     }
