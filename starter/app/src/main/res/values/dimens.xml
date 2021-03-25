@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="default_padding">8dp</dimen>
+
+
+    <dimen name="text_size">12sp</dimen>
+
+    <dimen name="main_title">20sp</dimen>
+    <dimen name="profile_image">75dp</dimen>
+    <dimen name="margin_5dp">5dp</dimen>
+    <dimen name="margin_8dp">8dp</dimen>
+    <dimen name="default_margin">10dp</dimen>
+    <dimen name="margin_16dp">16dp</dimen>
+    <dimen name="margin_20dp">20dp</dimen>
+    <dimen name="margin_35dp">35dp</dimen>
+    <dimen name="margin_50dp">50dp</dimen>
+    <dimen name="margin_80dp">80dp</dimen>
+    <dimen name="padding_8dp">8dp</dimen>
+    <dimen name="text_size_15sp">15sp</dimen>
+
+</resources>
